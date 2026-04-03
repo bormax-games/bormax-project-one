@@ -2,7 +2,7 @@ name: "Bormax CI"
 on: [push, pull_request]
 
 jobs:
-  test:
+  start-test:
     runs-on: ubuntu-latest
     container:
       image: barichello/godot-ci:mono-4.6.1
