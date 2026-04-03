@@ -38,5 +38,6 @@ func _initialize():
 	print("----------------------------------------")
 	print(green + "SUCCESS: Bormax Project-One is initialized and stable." + reset)
 	print("----------------------------------------\n")
-	
+
+	instance.free()
 	quit(0)
