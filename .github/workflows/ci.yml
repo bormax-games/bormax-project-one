@@ -5,7 +5,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:4.2.1-mono
+      image: barichello/godot-ci:mono-4.6.1
     steps:
       - name: "Checkout Repository"
         uses: actions/checkout@v4
