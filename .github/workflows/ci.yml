@@ -1,0 +1,17 @@
+name: "Bormax CI"
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.6.1-mono
+    steps:
+      - name: "Checkout Repository"
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: "Run Bormax Validation Test"
+        run: |
+          godot --headless --path src/ -s tests/start_test.gd
