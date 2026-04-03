@@ -1,6 +1,11 @@
 extends SceneTree
 
 func _initialize():
+	# Define colors for output messages
+	var green = "\u001b[32m"
+	var red = "\u001b[31m"
+	var reset = "\u001b[0m"
+
 	print("\n----------------------------------------")
 	print("[CI/CD] STARTING PROJECT VALIDATION...")
 	print("----------------------------------------")
@@ -10,7 +15,7 @@ func _initialize():
 	# 1. File Check
 	print("Checking resource: " + scene_path)
 	if not FileAccess.file_exists(scene_path):
-		printerr("[ERROR] CRITICAL: File not found on disk.")
+		printerr(red + "[ERROR] CRITICAL: File not found on disk." + reset)
 		quit(1)
 		return
 
@@ -18,7 +23,7 @@ func _initialize():
 	print("Loading scene dependencies...")
 	var main_scene = load(scene_path)
 	if not main_scene:
-		printerr("[ERROR] CRITICAL: Could not load scene dependencies.")
+		printerr(red + "[ERROR] CRITICAL: Could not load scene dependencies." + reset)
 		quit(1)
 		return
 
@@ -26,12 +31,12 @@ func _initialize():
 	print("Instantiating game world...")
 	var instance = main_scene.instantiate()
 	if not instance:
-		printerr("[ERROR] CRITICAL: Scene instantiation failed.")
+		printerr(red + "[ERROR] CRITICAL: Scene instantiation failed." + reset)
 		quit(1)
 		return
 
 	print("----------------------------------------")
-	print("SUCCESS: Bormax Project-One is initialized and stable.")
+	print(green + "SUCCESS: Bormax Project-One is initialized and stable." + reset)
 	print("----------------------------------------\n")
 	
 	quit(0)
