@@ -16,7 +16,9 @@ jobs:
         run: apt-get update && apt-get install -y fontconfig
       # Preimports project and build UID cache so that start_test.gd can find path to main scene
       - name: Pre-import project (Build UID cache)
-        run: godot --headless --path src/ --editor --quit || true
+        run: | 
+          godot --headless --path src/ --editor --quit || true
+          godot --headless --path src/ --editor --quit || true
 
       - name: "Run Bormax Validation Test"
         run: godot --headless --path src/ -s tests/start_test.gd
