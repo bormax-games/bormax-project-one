@@ -1,0 +1,1 @@
+addons/terrain_3d/bin/** filter=lfs diff=lfs merge=lfs -text
