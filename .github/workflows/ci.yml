@@ -22,7 +22,10 @@ jobs:
           godot --headless --path src/ --editor --quit 2>&1 | tee "$LOG_FILE"
           
           if grep -q "ERROR:" "$LOG_FILE"; then
-            echo "Godot failed during pre-import"
+            echo "::error title=GODOT IMPORT FAILED::GODOT FAILED DURING PRE-IMPORT! Check the logs below for specific errors."
+            echo ">>> DETECTED ERRORS:"
+            grep "ERROR:" "$LOG_FILE"
+            echo ">>> END OF ERROR LIST"
             exit 1
           fi
 
