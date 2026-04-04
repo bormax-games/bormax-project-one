@@ -21,7 +21,7 @@ jobs:
 
           godot --headless --path src/ --editor --quit 2>&1 | tee "$LOG_FILE"
           
-          if grep -q "ERROR:" "$LOG_fILE"; then
+          if grep -q "ERROR:" "$LOG_FILE"; then
             echo "Godot failed during pre-import"
             exit 1
           fi
