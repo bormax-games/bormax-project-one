@@ -6,9 +6,24 @@
 [ext_resource type="Texture2D" uid="uid://dlkvhj0igkk1l" path="res://assets/textures/forest_path/Gravel039_2K-JPG_NormalDX.jpg" id="4_iemv1"]
 [ext_resource type="Script" uid="uid://kwg5hsd1cush" path="res://scripts/player.gd" id="5_5r6gg"]
 [ext_resource type="Script" uid="uid://c6enexmqjp6dw" path="res://addons/road-generator/nodes/road_manager.gd" id="6_5r6gg"]
+[ext_resource type="PackedScene" uid="uid://c3pomvbssn750" path="res://scenes/tree_path.tscn" id="6_ujalm"]
 [ext_resource type="Script" uid="uid://bqot7iaem6mxw" path="res://addons/road-generator/nodes/road_container.gd" id="7_m0mrr"]
 [ext_resource type="Material" path="res://assets/textures/forest_road_path/Road014C_1K-JPG.tres" id="8_5r6gg"]
 [ext_resource type="Script" uid="uid://cfi1erw7srwyb" path="res://addons/road-generator/nodes/road_point.gd" id="9_5g3ck"]
+[ext_resource type="Script" uid="uid://bi7xths4yqoyq" path="res://addons/proton_scatter/src/scatter.gd" id="11_ujalm"]
+[ext_resource type="Script" uid="uid://dcwerb5tyuyea" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="12_e6v1s"]
+[ext_resource type="Script" uid="uid://dmby0ybag5cix" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="13_xct8n"]
+[ext_resource type="Script" uid="uid://4hmv0gcw7wcs" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="14_lox74"]
+[ext_resource type="Script" uid="uid://byv5ei8mhndnu" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="15_bvaln"]
+[ext_resource type="Script" uid="uid://dmh07omeqflg3" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="16_ee5rx"]
+[ext_resource type="Script" uid="uid://nq72g6rqkb0g" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="17_teswq"]
+[ext_resource type="Script" uid="uid://c526xom5sb1e7" path="res://addons/proton_scatter/src/scatter_item.gd" id="18_c2qpp"]
+[ext_resource type="Script" uid="uid://m0learxw6kxc" path="res://addons/proton_scatter/src/scatter_shape.gd" id="19_0xwsg"]
+[ext_resource type="Script" uid="uid://cgd1spy3yebmk" path="res://addons/proton_scatter/src/shapes/path_shape.gd" id="20_r3mvv"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_phg0g"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_88vnd"]
 
 [sub_resource type="Gradient" id="Gradient_o5qli"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -51,7 +66,7 @@ _shader_parameters = {
 &"projection_threshold": 0.8
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbgi4"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gaetm"]
 transparency = 4
 cull_mode = 2
 vertex_color_use_as_albedo = true
@@ -64,10 +79,19 @@ distance_fade_max_distance = 96.0
 [sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_tefeu"]
 generated_type = 1
 height_offset = 0.5
-material_override = SubResource("StandardMaterial3D_tbgi4")
+material_override = SubResource("StandardMaterial3D_gaetm")
 last_lod = 0
 last_shadow_lod = 0
 lod0_range = 128.0
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_qbtci"]
+name = "tree_path"
+id = 1
+scene_file = ExtResource("6_ujalm")
+density = 0.01
+last_lod = 1
+last_shadow_lod = 1
+lod1_range = 128.0
 
 [sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_tbgi4"]
 name = "forest_floor"
@@ -87,24 +111,46 @@ detiling_rotation = 0.38
 detiling_shift = 0.27
 
 [sub_resource type="Terrain3DAssets" id="Terrain3DAssets_ewqsw"]
-mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_tefeu")])
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_tefeu"), SubResource("Terrain3DMeshAsset_qbtci")])
 texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_tbgi4"), SubResource("Terrain3DTextureAsset_o6xl0")])
 
-[sub_resource type="SphereMesh" id="SphereMesh_phg0g"]
+[sub_resource type="Resource" id="Resource_ijy8r"]
+script = ExtResource("14_lox74")
+amount = 75
+restrict_height = true
+reference_frame = 1
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_88vnd"]
+[sub_resource type="Resource" id="Resource_lch81"]
+script = ExtResource("15_bvaln")
+position = Vector3(0.15, 0.15, 0.15)
+rotation = Vector3(20, 360, 20)
+scale = Vector3(0.1, 0.1, 0.1)
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_1iddt"]
+script = ExtResource("16_ee5rx")
+offset_step = 0.2
+consecutive_step_multiplier = 0.75
+restrict_height = true
+
+[sub_resource type="Resource" id="Resource_cv8vd"]
+script = ExtResource("17_teswq")
+ray_length = 5.0
+ray_offset = 5.0
+remove_points_on_miss = false
+
+[sub_resource type="Resource" id="Resource_4loqb"]
+script = ExtResource("12_e6v1s")
+stack = Array[ExtResource("13_xct8n")]([SubResource("Resource_ijy8r"), SubResource("Resource_lch81"), SubResource("Resource_1iddt"), SubResource("Resource_cv8vd")])
+
+[sub_resource type="Resource" id="Resource_yd7yi"]
+script = ExtResource("20_r3mvv")
+metadata/_custom_type_script = "uid://cgd1spy3yebmk"
 
 [node name="Node3D" type="Node3D" unique_id=666415893]
 
-[node name="Terrain3D" type="Terrain3D" parent="." unique_id=382700888]
-data_directory = "res://terrain_texture"
-material = SubResource("Terrain3DMaterial_m0mrr")
-assets = SubResource("Terrain3DAssets_ewqsw")
-top_level = true
-metadata/_edit_lock_ = true
-
 [node name="Player" type="CharacterBody3D" parent="." unique_id=675873286]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1126251, 12.349588, -5.7986393)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.905933, 12.349588, -46.265446)
 script = ExtResource("5_5r6gg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1098266304]
@@ -143,6 +189,7 @@ script = ExtResource("9_5g3ck")
 traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 next_mag = 11.4902935
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint001")
 metadata/_custom_type_script = "uid://cfi1erw7srwyb"
@@ -343,3 +390,27 @@ prior_mag = 45.86185
 next_mag = 45.86185
 lane_width = 2.0
 next_pt_init = NodePath("../RoadPoint017")
+
+[node name="Terrain3D" type="Terrain3D" parent="." unique_id=1819820468]
+data_directory = "res://terrain_texture"
+material = SubResource("Terrain3DMaterial_m0mrr")
+assets = SubResource("Terrain3DAssets_ewqsw")
+collision_mode = 3
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="ProtonScatter" type="Node3D" parent="." unique_id=996588067]
+script = ExtResource("11_ujalm")
+modifier_stack = SubResource("Resource_4loqb")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+metadata/_custom_type_script = "uid://bi7xths4yqoyq"
+
+[node name="ScatterItem" type="Node3D" parent="ProtonScatter" unique_id=481877146]
+script = ExtResource("18_c2qpp")
+path = "uid://rfd7sngr3vl4"
+
+[node name="ScatterShape" type="Node3D" parent="ProtonScatter" unique_id=1952220472]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
+script = ExtResource("19_0xwsg")
+shape = SubResource("Resource_yd7yi")
