@@ -10,16 +10,6 @@
 [ext_resource type="Script" uid="uid://bqot7iaem6mxw" path="res://addons/road-generator/nodes/road_container.gd" id="7_m0mrr"]
 [ext_resource type="Material" path="res://assets/textures/forest_road_path/Road014C_1K-JPG.tres" id="8_5r6gg"]
 [ext_resource type="Script" uid="uid://cfi1erw7srwyb" path="res://addons/road-generator/nodes/road_point.gd" id="9_5g3ck"]
-[ext_resource type="Script" uid="uid://bi7xths4yqoyq" path="res://addons/proton_scatter/src/scatter.gd" id="11_ujalm"]
-[ext_resource type="Script" uid="uid://dcwerb5tyuyea" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="12_e6v1s"]
-[ext_resource type="Script" uid="uid://dmby0ybag5cix" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="13_xct8n"]
-[ext_resource type="Script" uid="uid://4hmv0gcw7wcs" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="14_lox74"]
-[ext_resource type="Script" uid="uid://byv5ei8mhndnu" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="15_bvaln"]
-[ext_resource type="Script" uid="uid://dmh07omeqflg3" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="16_ee5rx"]
-[ext_resource type="Script" uid="uid://nq72g6rqkb0g" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="17_teswq"]
-[ext_resource type="Script" uid="uid://c526xom5sb1e7" path="res://addons/proton_scatter/src/scatter_item.gd" id="18_c2qpp"]
-[ext_resource type="Script" uid="uid://m0learxw6kxc" path="res://addons/proton_scatter/src/scatter_shape.gd" id="19_0xwsg"]
-[ext_resource type="Script" uid="uid://cgd1spy3yebmk" path="res://addons/proton_scatter/src/shapes/path_shape.gd" id="20_r3mvv"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_phg0g"]
 
@@ -114,43 +104,10 @@ detiling_shift = 0.27
 mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_tefeu"), SubResource("Terrain3DMeshAsset_qbtci")])
 texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_tbgi4"), SubResource("Terrain3DTextureAsset_o6xl0")])
 
-[sub_resource type="Resource" id="Resource_ijy8r"]
-script = ExtResource("14_lox74")
-amount = 75
-restrict_height = true
-reference_frame = 1
-
-[sub_resource type="Resource" id="Resource_lch81"]
-script = ExtResource("15_bvaln")
-position = Vector3(0.15, 0.15, 0.15)
-rotation = Vector3(20, 360, 20)
-scale = Vector3(0.1, 0.1, 0.1)
-reference_frame = 2
-
-[sub_resource type="Resource" id="Resource_1iddt"]
-script = ExtResource("16_ee5rx")
-offset_step = 0.2
-consecutive_step_multiplier = 0.75
-restrict_height = true
-
-[sub_resource type="Resource" id="Resource_cv8vd"]
-script = ExtResource("17_teswq")
-ray_length = 5.0
-ray_offset = 5.0
-remove_points_on_miss = false
-
-[sub_resource type="Resource" id="Resource_4loqb"]
-script = ExtResource("12_e6v1s")
-stack = Array[ExtResource("13_xct8n")]([SubResource("Resource_ijy8r"), SubResource("Resource_lch81"), SubResource("Resource_1iddt"), SubResource("Resource_cv8vd")])
-
-[sub_resource type="Resource" id="Resource_yd7yi"]
-script = ExtResource("20_r3mvv")
-metadata/_custom_type_script = "uid://cgd1spy3yebmk"
-
 [node name="Node3D" type="Node3D" unique_id=666415893]
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=675873286]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.905933, 12.349588, -46.265446)
+transform = Transform3D(-0.65094644, 0, 0.7591237, 0, 1, 0, -0.7591237, 0, -0.65094644, 57.104923, 12.349588, -66.056114)
 script = ExtResource("5_5r6gg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1098266304]
@@ -160,7 +117,8 @@ mesh = SubResource("SphereMesh_phg0g")
 shape = SubResource("SphereShape3D_88vnd")
 
 [node name="Camera3D" type="Camera3D" parent="Player" unique_id=1377927947]
-transform = Transform3D(1, 0, 0, 0, 0.98711115, 0.16003625, 0, -0.16003625, 0.98711115, -0.0006337166, 0.47455102, 2.5456564)
+transform = Transform3D(0.9995005, -0.030820712, -0.0069971085, 0.031602856, 0.97205347, 0.23262282, -0.00036808848, -0.23272768, 0.9725419, -0.054851532, 0.7941847, 3.28273)
+fov = 88.48095
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1729872313]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 4.0035458, -2.4937944)
@@ -174,6 +132,7 @@ metadata/_custom_type_script = "uid://c6enexmqjp6dw"
 [node name="RoadContainer" type="Node3D" parent="RoadManager" unique_id=318704281]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.724932, 7.7332325, 0)
 script = ExtResource("7_m0mrr")
+create_geo = false
 material_resource = ExtResource("8_5r6gg")
 use_lowpoly_preview = true
 edge_containers = Array[NodePath]([NodePath(""), NodePath("")])
@@ -201,6 +160,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 9.027693
 next_mag = 5.6273975
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint002")
 next_pt_init = NodePath("../RoadPoint")
@@ -212,6 +172,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 11.696515
 next_mag = 9.027693
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint003")
 next_pt_init = NodePath("../RoadPoint001")
@@ -223,6 +184,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 8.0
 next_mag = 11.696515
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint004")
 next_pt_init = NodePath("../RoadPoint002")
@@ -234,6 +196,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 12.392066
 next_mag = 8.0
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint005")
 next_pt_init = NodePath("../RoadPoint003")
@@ -245,6 +208,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 9.693323
 next_mag = 12.392066
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint006")
 next_pt_init = NodePath("../RoadPoint004")
@@ -256,6 +220,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 13.086937
 next_mag = 9.693323
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint007")
 next_pt_init = NodePath("../RoadPoint005")
@@ -267,6 +232,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 10.381574
 next_mag = 13.086937
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint008")
 next_pt_init = NodePath("../RoadPoint006")
@@ -278,6 +244,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 18.606428
 next_mag = 10.381574
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint009")
 next_pt_init = NodePath("../RoadPoint007")
@@ -289,6 +256,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 22.165573
 next_mag = 18.606428
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint010")
 next_pt_init = NodePath("../RoadPoint008")
@@ -300,6 +268,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 12.223005
 next_mag = 22.165573
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint011")
 next_pt_init = NodePath("../RoadPoint009")
@@ -311,6 +280,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 9.837929
 next_mag = 12.223005
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint012")
 next_pt_init = NodePath("../RoadPoint010")
@@ -322,6 +292,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 9.584535
 next_mag = 9.837929
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint013")
 next_pt_init = NodePath("../RoadPoint011")
@@ -333,6 +304,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 9.264193
 next_mag = 9.584535
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint014")
 next_pt_init = NodePath("../RoadPoint012")
@@ -344,6 +316,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 13.022758
 next_mag = 9.264193
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint015")
 next_pt_init = NodePath("../RoadPoint013")
@@ -355,6 +328,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 16.37057
 next_mag = 13.022758
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint016")
 next_pt_init = NodePath("../RoadPoint014")
@@ -366,6 +340,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 18.845182
 next_mag = 16.37057
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint017")
 next_pt_init = NodePath("../RoadPoint015")
@@ -377,6 +352,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 45.86185
 next_mag = 18.845182
+create_geo = false
 lane_width = 2.0
 prior_pt_init = NodePath("../RoadPoint018")
 next_pt_init = NodePath("../RoadPoint016")
@@ -388,6 +364,7 @@ traffic_dir = Array[int]([2, 1])
 lanes = Array[int]([5, 5])
 prior_mag = 45.86185
 next_mag = 45.86185
+create_geo = false
 lane_width = 2.0
 next_pt_init = NodePath("../RoadPoint017")
 
@@ -398,19 +375,3 @@ assets = SubResource("Terrain3DAssets_ewqsw")
 collision_mode = 3
 top_level = true
 metadata/_edit_lock_ = true
-
-[node name="ProtonScatter" type="Node3D" parent="." unique_id=996588067]
-script = ExtResource("11_ujalm")
-modifier_stack = SubResource("Resource_4loqb")
-Performance/use_chunks = true
-Performance/chunk_dimensions = Vector3(15, 15, 15)
-metadata/_custom_type_script = "uid://bi7xths4yqoyq"
-
-[node name="ScatterItem" type="Node3D" parent="ProtonScatter" unique_id=481877146]
-script = ExtResource("18_c2qpp")
-path = "uid://rfd7sngr3vl4"
-
-[node name="ScatterShape" type="Node3D" parent="ProtonScatter" unique_id=1952220472]
-transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
-script = ExtResource("19_0xwsg")
-shape = SubResource("Resource_yd7yi")
