@@ -10,7 +10,7 @@ func _initialize():
 	print("[CI/CD] STARTING PROJECT VALIDATION...")
 	print("----------------------------------------")
 	
-	var scene_path = "res://main.tscn"
+	var scene_path = ProjectSettings.get_setting("application/run/main_scene")
 	
 	# 1. File Check
 	print("Checking resource: " + scene_path)

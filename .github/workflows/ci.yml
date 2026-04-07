@@ -11,7 +11,23 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+      # Install libraries that are not included by default on this Linux image
+      - name: Install Godot dependencies
+        run: apt-get update && apt-get install -y fontconfig
+      # Preimports project and build UID cache so that start_test.gd can find path to main scene
+      - name: Pre-import project (Build UID cache)
+        run: |
+          LOG_FILE=$( mktemp )
+
+          godot --headless --path src/ --editor --quit 2>&1 | tee "$LOG_FILE"
+          
+          if grep -q "ERROR:" "$LOG_FILE"; then
+            echo "::error title=GODOT IMPORT FAILED::GODOT FAILED DURING PRE-IMPORT! Check the logs below for specific errors."
+            echo ">>> DETECTED ERRORS:"
+            grep "ERROR:" "$LOG_FILE"
+            echo ">>> END OF ERROR LIST"
+            exit 1
+          fi
 
       - name: "Run Bormax Validation Test"
-        run: |
-          godot --headless --path src/ -s tests/start_test.gd
+        run: godot --headless --path src/ -s tests/start_test.gd
