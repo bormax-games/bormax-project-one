@@ -1152,6 +1152,27 @@ func _get_nearest_edge_roadpoint(source_rp: RoadPoint, ignore_same_cont: bool, o
 		nearest_rp = tgt_edge
 	return nearest_rp
 
+# ------------------------------------------------------------------------------
+#region CLEANUP
+# ------------------------------------------------------------------------------
+
+func clean_up() -> void:
+    if is_instance_valid(_overlay_ref) and _overlay_ref.mouse_exited.is_connected(_on_mouse_exited):
+        _overlay_ref.mouse_exited.disconnect(_on_mouse_exited)
+    _overlay_ref = null
+    
+    _hover_graphnode = null
+    _last_sel_inter = null
+    _last_rp_before_inter = null
+    hint_source_nodes.clear()
+    hint_target_nodes.clear()
+    pre_snap_trans.clear()
+    _intersect_dict.clear()
+    
+    plg = null
+    
+    if not self is RefCounted and not self.is_queued_for_deletion():
+        self.free()
 
 #endregion
 # ------------------------------------------------------------------------------

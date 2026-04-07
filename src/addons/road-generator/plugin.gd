@@ -88,17 +88,25 @@ func _enter_tree():
 	road_point_gizmo.set_hidden()
 	road_intersection_gizmo.set_hidden()
 
-
 func _exit_tree():
-	_eds.disconnect("selection_changed", self._on_selection_changed)
-	disconnect("scene_changed", self._on_scene_changed)
-	disconnect("scene_closed", self._on_scene_closed)
-	_road_toolbar.queue_free()
-	remove_node_3d_gizmo_plugin(road_point_gizmo)
-	remove_node_3d_gizmo_plugin(road_intersection_gizmo)
-	remove_inspector_plugin(road_container_editor)
-	remove_inspector_plugin(road_point_editor)
+    _eds.disconnect("selection_changed", self._on_selection_changed)
+    disconnect("scene_changed", self._on_scene_changed)
+    disconnect("scene_closed", self._on_scene_closed)
+    _road_toolbar.queue_free()
+    remove_node_3d_gizmo_plugin(road_point_gizmo)
+    remove_node_3d_gizmo_plugin(road_intersection_gizmo)
+    remove_inspector_plugin(road_container_editor)
+    remove_inspector_plugin(road_point_editor)
+    
+    # ---- OUT FIX MEMORY LEAKED ----
+    if is_instance_valid(connection_tool) and connection_tool.has_method("clean_up"):
+        connection_tool.clean_up()
+    # ----------------------------------
 
+    # Don't add the following, as they would result in repeast in the UI.
+    #remove_custom_type("RoadPoint")
+    # Don't add the following, as they would result in repeast in the UI.
+    #remove_custom_type("RoadPoint")
 	# Don't add the following, as they would result in repeast in the UI.
 	#remove_custom_type("RoadPoint")
 	#remove_custom_type("RoadContainer")
