@@ -1,0 +1,155 @@
+[gd_scene format=3 uid="uid://dhuxr6unmlfwo"]
+
+[ext_resource type="Script" uid="uid://kwg5hsd1cush" path="res://scripts/player.gd" id="1_ru4tf"]
+[ext_resource type="Texture2D" uid="uid://cfp02qv7lcjo8" path="res://assets/textures/forest_floor/Ground037_2K-JPG_Color.jpg" id="2_6sh32"]
+[ext_resource type="Texture2D" uid="uid://bqvuv7joh80c7" path="res://assets/textures/forest_floor/Ground037_2K-JPG_NormalDX.jpg" id="3_ejswk"]
+[ext_resource type="Texture2D" uid="uid://82yk1qycjcsk" path="res://assets/textures/forest_path/Gravel039_2K-JPG_Color.jpg" id="4_bbk5w"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_0xm2m"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ig7tw"]
+
+[sub_resource type="Gradient" id="Gradient_o5qli"]
+offsets = PackedFloat32Array(0.2, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0wfyh"]
+noise_type = 2
+frequency = 0.03
+cellular_jitter = 3.0
+cellular_return_type = 0
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 50.0
+domain_warp_fractal_type = 2
+domain_warp_fractal_lacunarity = 1.5
+domain_warp_fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sugp2"]
+noise = SubResource("FastNoiseLite_0wfyh")
+color_ramp = SubResource("Gradient_o5qli")
+seamless = true
+
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_jyhfs"]
+_shader_parameters = {
+&"bias_distance": 512.0,
+&"blend_sharpness": 0.5,
+&"depth_blur": 0.0,
+&"enable_macro_variation": true,
+&"enable_projection": true,
+&"flat_terrain_normals": false,
+&"macro_variation1": Color(1, 1, 1, 1),
+&"macro_variation2": Color(1, 1, 1, 1),
+&"macro_variation_slope": 0.333,
+&"mipmap_bias": 1.0,
+&"noise1_angle": 0.0,
+&"noise1_offset": Vector2(0.5, 0.5),
+&"noise1_scale": 0.04,
+&"noise2_scale": 0.076,
+&"noise_texture": SubResource("NoiseTexture2D_sugp2"),
+&"projection_threshold": 0.8
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbgi4"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.5, 0.5, 0.5, 1)
+distance_fade_mode = 1
+distance_fade_min_distance = 128.0
+distance_fade_max_distance = 96.0
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_tefeu"]
+generated_type = 1
+height_offset = 0.5
+material_override = SubResource("StandardMaterial3D_tbgi4")
+last_lod = 0
+last_shadow_lod = 0
+lod0_range = 128.0
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_tbgi4"]
+name = "forest_floor"
+albedo_texture = ExtResource("2_6sh32")
+normal_texture = ExtResource("3_ejswk")
+uv_scale = 1.379
+detiling_rotation = 0.41
+detiling_shift = 0.478
+
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_o6xl0"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_tefeu")])
+texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_tbgi4")])
+
+[sub_resource type="Curve3D" id="Curve3D_ru4tf"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.06272888, -6.5812416, -0.03136528, 0, 0, 0, 0, 0, 0, 3.8264961, -7.1045895, -3.795132, 0, 0, 0, 0, 0, 0, 7.4020767, -7.539572, -8.15483, 0, 0, 0, 0, 0, 0, 9.22123, -7.536787, -10.318996, 0, 0, 0, 0, 0, 0, 12.637085, -6.83622, -16.507187, 0, 0, 0, 0, 0, 0, 16.27024, -3.9393263, -22.351837, 0, 0, 0, 0, 0, 0, 18.589508, -3.0014496, -26.541096, 0, 0, 0, 0, 0, 0, 22.242943, -3.1269999, -30.839249, 0, 0, 0, 0, 0, 0, 26.606537, -3.5773625, -36.69363, 0, 0, 0, 0, 0, 0, 31.86937, -3.5766091, -39.325047, 0, 0, 0, 0, 0, 0, 36.401245, -4.2624917, -42.687412, 0, 0, 0, 0, 0, 0, 40.20218, -5.7867393, -46.342155, 0, 0, 0, 0, 0, 0, 42.24884, -5.574622, -49.996902, 0, 0, 0, 0, 0, 0, 42.36348, -5.113256, -55.490192, 0, 0, 0, 0, 0, 0, 41.170135, -3.3579726, -60.661324, 0, 0, 0, 0, 0, 0, 45.744614, -1.678051, -65.23579, 0, 0, 0, 0, 0, 0, 51.313522, -2.5961328, -67.82135, 0, 0, 0, 0, 0, 0, 56.282135, -2.192615, -73.32911, 0, 0, 0, 0, 0, 0, 60.340927, -2.6259418, -77.11733, 0, 0, 0, 0, 0, 0, 66.02327, -4.6658206, -80.36438, 0, 0, 0, 0, 0, 0, 69.81149, -6.1975746, -81.9879, 0, 0, 0, 0, 0, 0, 72.517365, -6.7934294, -83.61143, 0, 0, 0, 0, 0, 0, 75.76442, -7.331609, -86.04671, 0, 0, 0, 0, 0, 0, 79.8232, -7.3660307, -87.94082, 0, 0, 0, 0, 0, 0, 83.611435, -7.3054447, -88.481995, 0, 0, 0, 0, 0, 0, 88.21141, -7.0298796, -89.56434, 0, 0, 0, 0, 0, 0, 91.18785, -6.6116877, -90.64669, 0, 0, 0, 0, 0, 0, 98.7643, -4.5031905, -93.35256, 0, 0, 0, 0, 0, 0, 102.28194, -3.5409298, -93.623146, 0, 0, 0, 0, 0, 0, 106.757935, -2.0137, -96.45028, 0, 0, 0, 0, 0, 0, 109.33484, -1.5434976, -100.49971, 0, 0, 0, 0, 0, 0, 111.91177, -0.66531944, -106.021675, 0, 0, 0, 0, 0, 0, 114.85681, -3.71933e-05, -111.17551, 0, 0, 0, 0, 0, 0, 120, -0.8000641, -117, 0, 0, 0, 0, 0, 0, 122.74442, 0.19921112, -123.84843, 0, 0, 0, 0, 0, 0, 128.09709, -1.8903685, -125.48873, 0, 0, 0, 0, 0, 0, 133.48364, -0.55316544, -124.93801, 0, 0, 0, 0, 0, 0, 139.28212, -0.555665, -122.022934, 0, 0, 0, 0, 0, 0, 145.43098, 1.0869989, -118.47654, 0, 0, 0, 0, 0, 0, 146.60335, -0.38261223, -113.37516, 0, 0, 0, 0, 0, 0, 148.0292, -0.47116566, -109.92143, 0, 0, 0, 0, 0, 0, 154.23846, -0.12899113, -107.57479, 0, 0, 0, 0, 0, 0, 158.85439, 0.27767563, -110.4405),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 43
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6sh32"]
+albedo_texture = ExtResource("4_bbk5w")
+uv1_scale = Vector3(15, 15, 15)
+
+[node name="Main" type="Node3D" unique_id=1586223194]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=242732484]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=746578456]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 4.0035458, -2.4937944)
+shadow_enabled = true
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=994340436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.079991, -0.0027673244)
+script = ExtResource("1_ru4tf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=179092105]
+mesh = SubResource("SphereMesh_0xm2m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1448756902]
+shape = SubResource("SphereShape3D_ig7tw")
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=203588490]
+transform = Transform3D(1, 0, 0, 0, 0.98711115, 0.16003625, 0, -0.16003625, 0.98711115, -0.0006337166, 0.47455102, 2.5456564)
+
+[node name="Terrain3D" type="Terrain3D" parent="." unique_id=80409940]
+data_directory = "res://terrain_texture"
+material = SubResource("Terrain3DMaterial_jyhfs")
+assets = SubResource("Terrain3DAssets_o6xl0")
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="ForestPath" type="Path3D" parent="." unique_id=2045710988]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.522498, 0)
+curve = SubResource("Curve3D_ru4tf")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="ForestPath" unique_id=271202638]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02009964, 0, 0.010800362)
+use_collision = true
+polygon = PackedVector2Array(-2.7772574, 0.280334, -2.7450008, 0.34626484, 3.229128, 0.38902187, 3.3143265, 0.29348326)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 59.4
+path_joined = false
+material = SubResource("StandardMaterial3D_6sh32")
