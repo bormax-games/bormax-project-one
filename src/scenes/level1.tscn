@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c3pomvbssn750" path="res://assets/models/path_tree/tree_path.tscn" id="2_ru4tf"]
 [ext_resource type="Texture2D" uid="uid://bqvuv7joh80c7" path="res://assets/textures/forest_floor/Ground037_2K-JPG_NormalDX.jpg" id="3_ejswk"]
 [ext_resource type="Texture2D" uid="uid://82yk1qycjcsk" path="res://assets/textures/forest_path/Gravel039_2K-JPG_Color.jpg" id="4_bbk5w"]
-[ext_resource type="Script" uid="uid://cm5vpuvlxjk8y" path="res://scenes/TreeCollisionManager.gd" id="6_6sh32"]
+[ext_resource type="Script" uid="uid://cm5vpuvlxjk8y" path="res://scripts/TreeCollisionManager.gd" id="6_6sh32"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
