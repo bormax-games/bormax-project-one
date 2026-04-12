@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dq6trlvjtipo6"]
 
+[ext_resource type="Script" uid="uid://51wjiph4ikw7" path="res://scenes/main.gd" id="1_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://cfp02qv7lcjo8" path="res://assets/textures/forest_floor/Ground037_2K-JPG_Color.jpg" id="2_sugp2"]
 [ext_resource type="Texture2D" uid="uid://bqvuv7joh80c7" path="res://assets/textures/forest_floor/Ground037_2K-JPG_NormalDX.jpg" id="3_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://82yk1qycjcsk" path="res://assets/textures/forest_path/Gravel039_2K-JPG_Color.jpg" id="4_tbgi4"]
@@ -104,6 +105,8 @@ mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_tefeu")])
 texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_tbgi4"), SubResource("Terrain3DTextureAsset_o6xl0")])
 
 [node name="Main" type="Node3D" unique_id=1586223194]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35.446365, 0)
+script = ExtResource("1_tbgi4")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=242732484]
 environment = SubResource("Environment_h2yge")
