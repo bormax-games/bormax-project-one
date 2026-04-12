@@ -150,6 +150,12 @@ func _spawn_player_local(peer_id: int) -> void:
 	var player := PLAYER_SCENE.instantiate()
 	player.name = str(peer_id)
 	players_root.add_child(player)
+	
+	var spawn_point := world_root.get_node_or_null("SpawnPoint")
+	if spawn_point != null:
+		player.global_position = spawn_point.global_position + Vector3(0,2,0)
+	
+	
 	if player.has_method("setup_from_peer"):
 		player.setup_from_peer(peer_id)
 	_player_nodes[peer_id] = player
