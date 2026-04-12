@@ -15,6 +15,10 @@ run/main_scene="uid://dq6trlvjtipo6"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Net="*uid://b4gtqgokr16c7"
+
 [dotnet]
 
 project/assembly_name="bormax-project-one"
