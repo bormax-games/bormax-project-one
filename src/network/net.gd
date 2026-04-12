@@ -193,7 +193,7 @@ func _server_try_pickup(peer_id: int) -> void:
 			continue
 		if not (child is Node3D):
 			continue
-		var dist := player.global_position.distance_to(child.global_position)
+		var dist : float = player.global_position.distance_to(child.global_position)
 		if dist < 2.5 and dist < best_distance:
 			best_distance = dist
 			best_item = child
