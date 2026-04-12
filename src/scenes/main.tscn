@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://dq6trlvjtipo6"]
 
-[ext_resource type="Script" uid="uid://kwg5hsd1cush" path="res://scripts/player.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://cfp02qv7lcjo8" path="res://assets/textures/forest_floor/Ground037_2K-JPG_Color.jpg" id="2_sugp2"]
 [ext_resource type="Texture2D" uid="uid://bqvuv7joh80c7" path="res://assets/textures/forest_floor/Ground037_2K-JPG_NormalDX.jpg" id="3_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://82yk1qycjcsk" path="res://assets/textures/forest_path/Gravel039_2K-JPG_Color.jpg" id="4_tbgi4"]
@@ -23,10 +22,6 @@ glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
 size = Vector3(20, 1, 20)
-
-[sub_resource type="SphereMesh" id="SphereMesh_0xm2m"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_ig7tw"]
 
 [sub_resource type="Gradient" id="Gradient_o5qli"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -127,19 +122,6 @@ mesh = SubResource("PlaneMesh_7dm0k")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=546658321]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_ig7tw")
-
-[node name="Player" type="CharacterBody3D" parent="." unique_id=994340436]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.079991, -0.0027673244)
-script = ExtResource("1_o5qli")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=179092105]
-mesh = SubResource("SphereMesh_0xm2m")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1448756902]
-shape = SubResource("SphereShape3D_ig7tw")
-
-[node name="Camera3D" type="Camera3D" parent="Player" unique_id=203588490]
-transform = Transform3D(1, 0, 0, 0, 0.98711115, 0.16003625, 0, -0.16003625, 0.98711115, -0.0006337166, 0.47455102, 2.5456564)
 
 [node name="Terrain3D" type="Terrain3D" parent="." unique_id=80409940]
 data_directory = "res://terrain_texture"
