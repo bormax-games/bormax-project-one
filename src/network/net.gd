@@ -11,12 +11,17 @@ const DEFAULT_PORT := 7777
 const DEFAULT_MAX_CLIENTS := 8
 const PLAYER_SCENE := preload("res://network/net_player.tscn")
 
+
 var players_root: Node = null
 var items_root: Node = null
 var world_root: Node = null
 
 var _peer: ENetMultiplayerPeer
 var _player_nodes: Dictionary = {}
+
+var _pending_mode := ""
+var _pending_address := ""
+var _pending_port := 9999
 
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
@@ -63,6 +68,37 @@ func join(address: String, port: int = DEFAULT_PORT) -> Error:
 	multiplayer.multiplayer_peer = _peer
 	_push_status("Joining %s:%d" % [address, port])
 	return OK
+	
+	
+#functions for main scene to connect to level1
+func go_to_level_as_host() -> void:
+	print("Net: go_to_level_as_host")
+	_pending_mode = "host"
+	get_tree().change_scene_to_file("res://scenes/level1.tscn")
+
+
+func go_to_level_as_client(address: String) -> void:
+	print("Net: go_to_level_as_client")
+	_pending_mode = "join"
+	_pending_address = address
+	get_tree().change_scene_to_file("res://scenes/level1.tscn")
+
+
+func start_pending_connection() -> void:
+	print("Net: start_pending_connection")
+
+	if _pending_mode == "host":
+		_pending_mode = ""
+		print("Net: caling host")
+		host()
+	elif _pending_mode == "join":
+		var addr = _pending_address
+		_pending_mode = ""
+		print("Net: calling  join")
+		join(addr)
+	else:
+		print("No pending mode")
+#ends here
 
 
 func stop() -> void:
@@ -76,7 +112,7 @@ func stop() -> void:
 func is_online() -> bool:
 	return multiplayer.multiplayer_peer != null
 
-
+  
 func is_server() -> bool:
 	return multiplayer.is_server()
 
