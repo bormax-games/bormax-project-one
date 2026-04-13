@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c3pomvbssn750" path="res://assets/models/path_tree/tree_path.tscn" id="2_ru4tf"]
 [ext_resource type="Texture2D" uid="uid://bqvuv7joh80c7" path="res://assets/textures/forest_floor/Ground037_2K-JPG_NormalDX.jpg" id="3_ejswk"]
 [ext_resource type="Texture2D" uid="uid://82yk1qycjcsk" path="res://assets/textures/forest_path/Gravel039_2K-JPG_Color.jpg" id="4_bbk5w"]
+[ext_resource type="PackedScene" uid="uid://ogidpb0roxoo" path="res://assets/models/characters/magician.fbx" id="6_6sh32"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -18,10 +19,6 @@ background_mode = 2
 sky = SubResource("Sky_0xm2m")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="SphereMesh" id="SphereMesh_0xm2m"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_ig7tw"]
 
 [sub_resource type="Gradient" id="Gradient_o5qli"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -95,27 +92,17 @@ point_count = 37
 albedo_texture = ExtResource("4_bbk5w")
 uv1_scale = Vector3(15, 15, 15)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_6sh32"]
+radius = 2.0926275
+
 [node name="Main" type="Node3D" unique_id=1586223194]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=242732484]
 environment = SubResource("Environment_h2yge")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=746578456]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 4.0035458, -2.4937944)
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, -0.6088238, 6.8770657, 3.2189994)
 shadow_enabled = true
-
-[node name="Player" type="CharacterBody3D" parent="." unique_id=994340436]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.969923, 14.150568, -4.6701736)
-script = ExtResource("1_ru4tf")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=179092105]
-mesh = SubResource("SphereMesh_0xm2m")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1448756902]
-shape = SubResource("SphereShape3D_ig7tw")
-
-[node name="Camera3D" type="Camera3D" parent="Player" unique_id=203588490]
-transform = Transform3D(1, 0, 0, 0, 0.98711115, 0.16003625, 0, -0.16003625, 0.98711115, -0.0006337166, 0.47455102, 2.5456564)
 
 [node name="Terrain3D" type="Terrain3D" parent="." unique_id=80409940]
 data_directory = "res://terrain_texture"
@@ -144,3 +131,18 @@ path_continuous_u = true
 path_u_distance = 59.4
 path_joined = false
 material = SubResource("StandardMaterial3D_6sh32")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=510003119]
+script = ExtResource("1_ru4tf")
+
+[node name="magician" parent="Player" unique_id=1928915271 instance=ExtResource("6_6sh32")]
+transform = Transform3D(-0.21468411, 0, 0.12810437, 0, 0.25, 0, -0.12810437, 0, -0.21468411, 4.2852, 4.539145, -3.2992666)
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=510819943]
+transform = Transform3D(0.9481241, 0.09538283, -0.3032537, 0, 0.9539266, 0.30003992, 0.31790042, -0.2844751, 0.9044408, 2.847783, 8.293755, -0.19648123)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=910504459]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3698964, 6.663209, -3.4084733)
+shape = SubResource("SphereShape3D_6sh32")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=2046238523]
