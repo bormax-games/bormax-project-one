@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c3pomvbssn750" path="res://assets/models/path_tree/tree_path.tscn" id="2_ru4tf"]
 [ext_resource type="Texture2D" uid="uid://bqvuv7joh80c7" path="res://assets/textures/forest_floor/Ground037_2K-JPG_NormalDX.jpg" id="3_ejswk"]
 [ext_resource type="Texture2D" uid="uid://82yk1qycjcsk" path="res://assets/textures/forest_path/Gravel039_2K-JPG_Color.jpg" id="4_bbk5w"]
+[ext_resource type="Script" uid="uid://cm5vpuvlxjk8y" path="res://scripts/TreeCollisionManager.gd" id="6_6sh32"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -105,7 +106,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=994340436]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.969923, 14.150568, -4.6701736)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.369423, 14.150568, -3.5621338)
 script = ExtResource("1_ru4tf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=179092105]
@@ -144,3 +145,10 @@ path_continuous_u = true
 path_u_distance = 59.4
 path_joined = false
 material = SubResource("StandardMaterial3D_6sh32")
+
+[node name="TreeCollisions" type="Node3D" parent="." unique_id=579708356 node_paths=PackedStringArray("terrain", "player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.380611, 0, -98.00001)
+script = ExtResource("6_6sh32")
+terrain = NodePath("../Terrain3D")
+player = NodePath("../Player")
+show_debug_shapes = true
