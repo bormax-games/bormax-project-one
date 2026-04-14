@@ -21,7 +21,6 @@ var _player_nodes: Dictionary = {}
 
 var _pending_mode := ""
 var _pending_address := ""
-var _pending_port := 9999
 
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
