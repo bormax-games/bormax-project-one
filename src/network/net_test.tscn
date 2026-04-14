@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://dwgv7whqyjmwt"]
+
+[ext_resource type="Script" uid="uid://d1ogxc7cqmqul" path="res://network/net_test.gd" id="1_ivt4x"]
+[ext_resource type="PackedScene" path="res://network/pickup_item.tscn" id="2_jcr1w"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.0470588, 0.0705882, 0.109804, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.75
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(24, 1, 24)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(24, 1, 24)
+
+[node name="NetTest" type="Node3D" unique_id=1634717096]
+script = ExtResource("1_ivt4x")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=292693581]
+environment = SubResource("Environment_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=854461822]
+transform = Transform3D(0.866025, 0, -0.5, 0.12941, 0.965926, 0.224144, 0.482963, -0.258819, 0.836516, 0, 8, 0)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1725098106]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=8726907]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1209610454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_1")
+
+[node name="Players" type="Node3D" parent="." unique_id=316794559]
+
+[node name="Items" type="Node3D" parent="." unique_id=635095291]
+
+[node name="Pickup01" parent="Items" unique_id=1597186938 instance=ExtResource("2_jcr1w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.4, 0)
+
+[node name="Pickup02" parent="Items" unique_id=18427458 instance=ExtResource("2_jcr1w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.4, 0)
+
+[node name="Pickup03" parent="Items" unique_id=928333077 instance=ExtResource("2_jcr1w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -3)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1087322962]
+
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1980199003]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 640.0
+offset_bottom = 110.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Panel" unique_id=1748340618]
+layout_mode = 0
+offset_right = 624.0
+offset_bottom = 94.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel/MarginContainer" unique_id=1926892760]
+layout_mode = 2
+
+[node name="HelpLabel" type="Label" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer" unique_id=1753164700]
+layout_mode = 2
+text = "Help"
+
+[node name="StatusLabel" type="Label" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer" unique_id=2016530966]
+layout_mode = 2
+text = "Status"

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dhuxr6unmlfwo"]
 
-[ext_resource type="Script" uid="uid://kwg5hsd1cush" path="res://scripts/player.gd" id="1_ru4tf"]
+[ext_resource type="Script" uid="uid://cxipgmqh0n6fy" path="res://scenes/level_1.gd" id="1_ru4tf"]
 [ext_resource type="Texture2D" uid="uid://cfp02qv7lcjo8" path="res://assets/textures/forest_floor/Ground037_2K-JPG_Color.jpg" id="2_6sh32"]
 [ext_resource type="PackedScene" uid="uid://c3pomvbssn750" path="res://assets/models/path_tree/tree_path.tscn" id="2_ru4tf"]
 [ext_resource type="Texture2D" uid="uid://bqvuv7joh80c7" path="res://assets/textures/forest_floor/Ground037_2K-JPG_NormalDX.jpg" id="3_ejswk"]
@@ -30,10 +30,6 @@ fog_enabled = true
 fog_light_color = Color(0.53333336, 0.6, 0.6666667, 1)
 fog_light_energy = 0.3
 fog_density = 0.02
-
-[sub_resource type="SphereMesh" id="SphereMesh_0xm2m"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_ig7tw"]
 
 [sub_resource type="Gradient" id="Gradient_o5qli"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -108,6 +104,7 @@ albedo_texture = ExtResource("4_bbk5w")
 uv1_scale = Vector3(15, 15, 15)
 
 [node name="Main" type="Node3D" unique_id=1586223194]
+script = ExtResource("1_ru4tf")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=242732484]
 environment = SubResource("Environment_h2yge")
@@ -118,19 +115,6 @@ light_color = Color(0.78431374, 0.84705883, 1, 1)
 light_energy = 0.3
 shadow_enabled = true
 shadow_opacity = 0.9
-
-[node name="Player" type="CharacterBody3D" parent="." unique_id=994340436]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.369423, 14.150568, -3.5621338)
-script = ExtResource("1_ru4tf")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=179092105]
-mesh = SubResource("SphereMesh_0xm2m")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1448756902]
-shape = SubResource("SphereShape3D_ig7tw")
-
-[node name="Camera3D" type="Camera3D" parent="Player" unique_id=203588490]
-transform = Transform3D(1, 0, 0, 0, 0.98711115, 0.16003625, 0, -0.16003625, 0.98711115, -0.0006337166, 0.47455102, 2.5456564)
 
 [node name="Terrain3D" type="Terrain3D" parent="." unique_id=80409940]
 data_directory = "res://terrain_texture"
@@ -160,9 +144,16 @@ path_u_distance = 59.4
 path_joined = false
 material = SubResource("StandardMaterial3D_6sh32")
 
-[node name="TreeCollisions" type="Node3D" parent="." unique_id=579708356 node_paths=PackedStringArray("terrain", "player")]
+[node name="TreeCollisions" type="Node3D" parent="." unique_id=579708356 node_paths=PackedStringArray("terrain", "players_root")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.380611, 0, -98.00001)
 script = ExtResource("6_6sh32")
 terrain = NodePath("../Terrain3D")
-player = NodePath("../Player")
+players_root = NodePath("../Players")
 show_debug_shapes = true
+
+[node name="Players" type="Node3D" parent="." unique_id=914085327]
+
+[node name="Items" type="Node3D" parent="." unique_id=1580734331]
+
+[node name="SpawnPoint" type="Marker3D" parent="." unique_id=1645209282]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3536153, 9.518418, -5.778077)

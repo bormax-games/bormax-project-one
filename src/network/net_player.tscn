@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bawjq2ird5nr0"]
+
+[ext_resource type="Script" uid="uid://cd75xj8rxs2p3" path="res://network/net_player.gd" id="1_8s61h"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+radius = 0.35
+height = 1.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1"]
+radius = 0.35
+height = 1.2
+
+[node name="NetPlayer" type="CharacterBody3D" unique_id=1905415960]
+script = ExtResource("1_8s61h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=501704187]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+shape = SubResource("CapsuleShape3D_1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=207407715]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+mesh = SubResource("CapsuleMesh_1")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=575924117]
+
+[node name="Camera3D" type="Camera3D" parent="Pivot" unique_id=1864580488]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3, 5.5)
+
+[node name="Label3D" type="Label3D" parent="." unique_id=54114376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+billboard = 1
+text = "Peer"
+font_size = 28
