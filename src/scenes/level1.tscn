@@ -136,7 +136,7 @@ material = SubResource("StandardMaterial3D_6sh32")
 script = ExtResource("1_ru4tf")
 
 [node name="Camera3D" type="Camera3D" parent="Player" unique_id=510819943]
-transform = Transform3D(0.9481241, 0.09538283, -0.3032537, 0, 0.9539266, 0.30003992, 0.31790042, -0.2844751, 0.9044408, 2.847783, 8.293755, -0.19648123)
+transform = Transform3D(0.9481241, 0.09538283, -0.30325368, 0, 0.9539267, 0.30003998, 0.31790042, -0.28447512, 0.9044409, 1.4063625, 8.293755, 0.6758331)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=910504459]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2916288, 6.231751, -2.1764836)
@@ -144,5 +144,5 @@ shape = SubResource("SphereShape3D_6sh32")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=2046238523]
 
-[node name="magician" parent="Player" unique_id=639164366 instance=ExtResource("6_6sh32")]
+[node name="magician" parent="Player" unique_id=1912327423 instance=ExtResource("6_6sh32")]
 transform = Transform3D(-0.19539373, 0, 0.15595286, 0, 0.25, 0, -0.15595286, 0, -0.19539373, 2.1740875, 4.689636, -1.7718061)
