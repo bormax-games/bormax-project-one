@@ -144,5 +144,5 @@ shape = SubResource("SphereShape3D_6sh32")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=2046238523]
 
-[node name="magician" parent="Player" unique_id=1912327423 instance=ExtResource("6_6sh32")]
+[node name="magician" parent="Player" unique_id=1149928085 instance=ExtResource("6_6sh32")]
 transform = Transform3D(-0.19539373, 0, 0.15595286, 0, 0.25, 0, -0.15595286, 0, -0.19539373, 2.1740875, 4.689636, -1.7718061)
