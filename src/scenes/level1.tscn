@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c3pomvbssn750" path="res://assets/models/path_tree/tree_path.tscn" id="2_ru4tf"]
 [ext_resource type="Texture2D" uid="uid://bqvuv7joh80c7" path="res://assets/textures/forest_floor/Ground037_2K-JPG_NormalDX.jpg" id="3_ejswk"]
 [ext_resource type="Texture2D" uid="uid://82yk1qycjcsk" path="res://assets/textures/forest_path/Gravel039_2K-JPG_Color.jpg" id="4_bbk5w"]
-[ext_resource type="PackedScene" uid="uid://ogidpb0roxoo" path="res://assets/models/characters/magician.fbx" id="6_6sh32"]
+[ext_resource type="PackedScene" uid="uid://dybb050qfaa7" path="res://assets/models/characters/magician.glb" id="6_6sh32"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -93,7 +93,7 @@ albedo_texture = ExtResource("4_bbk5w")
 uv1_scale = Vector3(15, 15, 15)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6sh32"]
-radius = 2.0926275
+radius = 1.6073762
 
 [node name="Main" type="Node3D" unique_id=1586223194]
 
@@ -135,14 +135,14 @@ material = SubResource("StandardMaterial3D_6sh32")
 [node name="Player" type="CharacterBody3D" parent="." unique_id=510003119]
 script = ExtResource("1_ru4tf")
 
-[node name="magician" parent="Player" unique_id=1928915271 instance=ExtResource("6_6sh32")]
-transform = Transform3D(-0.21468411, 0, 0.12810437, 0, 0.25, 0, -0.12810437, 0, -0.21468411, 4.2852, 4.539145, -3.2992666)
-
 [node name="Camera3D" type="Camera3D" parent="Player" unique_id=510819943]
 transform = Transform3D(0.9481241, 0.09538283, -0.3032537, 0, 0.9539266, 0.30003992, 0.31790042, -0.2844751, 0.9044408, 2.847783, 8.293755, -0.19648123)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=910504459]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3698964, 6.663209, -3.4084733)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2916288, 6.231751, -2.1764836)
 shape = SubResource("SphereShape3D_6sh32")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=2046238523]
+
+[node name="magician" parent="Player" unique_id=639164366 instance=ExtResource("6_6sh32")]
+transform = Transform3D(-0.19539373, 0, 0.15595286, 0, 0.25, 0, -0.15595286, 0, -0.19539373, 2.1740875, 4.689636, -1.7718061)
